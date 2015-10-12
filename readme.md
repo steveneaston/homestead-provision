@@ -14,10 +14,10 @@ Add the following provisioners into `Vagrantfile` located in the root of your pr
 
 ```ruby
 # Provision MongoDB
-config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/scripts/mongodb.sh", args: ["true", "3.0"]
+config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/master/scripts/mongodb.sh", args: ["true", "3.0"]
 
 # Provision PM2
-config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/scripts/pm2.sh"
+config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/master/scripts/pm2.sh"
 
 # Site settings
 settings["sites"].each do |site|
@@ -37,7 +37,7 @@ settings["sites"].each do |site|
 
     # Run queue worker
     if (site.has_key?("queue") && site["queue"])
-        config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/scripts/queue-worker.sh", args: [rootPath, site["map"]]
+        config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/master/scripts/queue-worker.sh", args: [rootPath, site["map"]]
     end
 
     # Spawn nodejs applications with PM2
