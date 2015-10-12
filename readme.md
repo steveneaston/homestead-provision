@@ -40,10 +40,11 @@ settings["sites"].each do |site|
         config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/scripts/queue-worker.sh", args: [rootPath, site["map"]]
     end
 
+    # Spawn nodejs applications with PM2
     if (site.has_key?("pm2") && site["pm2"])
         site["pm2"].each do |njs|
             config.vm.provision "shell",
-                inline: "echo pm2 start " + rootPath + njs
+                inline: "pm2 start " + rootPath + njs
         end
     end
 end
@@ -53,10 +54,10 @@ end
 
 You can add the following new options to each site within `Homestead.yaml`:
 
-* migrate
-* composer
-* queue
-* pm2
+* `migrate`
+* `composer`
+* `queue`
+* `pm2`
 
 `migrate: true` runs migrations
 
