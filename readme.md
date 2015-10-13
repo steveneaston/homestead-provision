@@ -19,6 +19,9 @@ config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneast
 # Provision PM2
 config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/master/scripts/pm2.sh"
 
+# Provision Redis Commander
+config.vm.provision "shell", path: "https://raw.githubusercontent.com/steveneaston/homestead-provision/master/scripts/redis-commander.sh"
+
 # Site settings
 settings["sites"].each do |site|
     rootPath = site["to"].sub(/public$/, '');
