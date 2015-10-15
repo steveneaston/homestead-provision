@@ -8,7 +8,15 @@ RC_IS_INSTALLED=$?
 if [ $RC_IS_INSTALLED -eq 1 ]; then
     echo ">>> Installing Redis Commander"
     npm install -g redis-commander
-    export HOME=/home/vagrant
 fi
 
-pm2 start redis-commander
+if [ ! -f /etc/supervisor/conf.d/redis-commander.conf ]; then
+    echo ">>> Installing Redis commander supervisor config"
+
+config="[program:redis]
+
+command=redis-commander --redis-port=6379 --redis-host=127.0.0.1 --port=8081
+"
+
+    echo "$config" > "/etc/supervisor/conf.d/redis-commander.conf"
+fi
